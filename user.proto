@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+option go_package = "github.com/thisisadi/Total-Corp-Task/user";
+
+message User {
+  int32 id = 1;
+  string fname = 2;
+  string city = 3;
+  int64 phone = 4;
+  double height = 5;
+  bool married = 6;
+}
+
+message UserRequest {
+  int32 id = 1;
+}
+
+message UserIdsRequest {
+  repeated int32 ids = 1;
+}
+
+message UsersResponse {
+  repeated User users = 1;
+}
+
+service UserService {
+  rpc GetUserById (UserRequest) returns (User);
+  rpc GetUsersByIds (UserIdsRequest) returns (UsersResponse);
+}
