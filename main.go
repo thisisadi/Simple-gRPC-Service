@@ -36,6 +36,8 @@ func (s *UserServiceServer) GetUsersByIds(ctx context.Context, request *user.Use
 		u, ok := records.Users[int(userID)]
 		if ok {
 			matchedUsers = append(matchedUsers, u)
+		} else {
+			matchedUsers = append(matchedUsers, nil)
 		}
 	}
 
