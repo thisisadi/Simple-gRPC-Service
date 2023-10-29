@@ -19,10 +19,9 @@ type UserServiceServer struct {
 func (s *UserServiceServer) GetUserById(ctx context.Context, request *user.UserRequest) (*user.User, error) {
 
 	userID := request.Id
-	for _, u := range records.Users {
-		if u.Id == userID {
-			return u, nil
-		}
+	u, ok := records.Users[int(userID)]
+	if ok {
+		return u, nil
 	}
 
 	// If no user is found with the given ID, return an error
@@ -33,17 +32,13 @@ func (s *UserServiceServer) GetUsersByIds(ctx context.Context, request *user.Use
 	userIDs := request.Ids
 	var matchedUsers []*user.User
 
-	// Iterate over the IDs and find matching users
 	for _, userID := range userIDs {
-		for _, u := range records.Users {
-			if u.Id == userID {
-				matchedUsers = append(matchedUsers, u)
-				break
-			}
+		u, ok := records.Users[int(userID)]
+		if ok {
+			matchedUsers = append(matchedUsers, u)
 		}
 	}
 
-	// Create a UsersResponse with the matched users
 	response := &user.UsersResponse{
 		Users: matchedUsers,
 	}
