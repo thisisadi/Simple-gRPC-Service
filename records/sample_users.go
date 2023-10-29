@@ -1,8 +1,6 @@
-package main
+package records
 
-import (
-	"github.com/thisisadi/Total-Corp-Task/user"
-)
+import "github.com/thisisadi/Total-Corp-Task/user"
 
 var Users = []*user.User{
 	{Id: 1, Fname: "Steve", City: "LA", Phone: 1234567890, Height: 5.8, Married: true},
