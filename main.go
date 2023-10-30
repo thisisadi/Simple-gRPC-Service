@@ -1,52 +1,13 @@
 package main
 
 import (
-	"context"
 	"log"
 	"net"
 
-	"github.com/thisisadi/Total-Corp-Task/records"
 	"github.com/thisisadi/Total-Corp-Task/user"
+	"github.com/thisisadi/Total-Corp-Task/utils"
 	"google.golang.org/grpc"
-	"google.golang.org/grpc/codes"
-	"google.golang.org/grpc/status"
 )
-
-type UserServiceServer struct {
-	user.UnimplementedUserServiceServer
-}
-
-func (s *UserServiceServer) GetUserById(ctx context.Context, request *user.UserRequest) (*user.User, error) {
-
-	userID := request.Id
-	u, ok := records.Users[int(userID)]
-	if ok {
-		return u, nil
-	}
-
-	// If no user is found with the given ID, return an error
-	return nil, status.Errorf(codes.NotFound, "User with ID %d not found", userID)
-}
-
-func (s *UserServiceServer) GetUsersByIds(ctx context.Context, request *user.UserIdsRequest) (*user.UsersResponse, error) {
-	userIDs := request.Ids
-	var matchedUsers []*user.User
-
-	for _, userID := range userIDs {
-		u, ok := records.Users[int(userID)]
-		if ok {
-			matchedUsers = append(matchedUsers, u)
-		} else {
-			matchedUsers = append(matchedUsers, nil)
-		}
-	}
-
-	response := &user.UsersResponse{
-		Users: matchedUsers,
-	}
-
-	return response, nil
-}
 
 func main() {
 	lis, err := net.Listen("tcp", ":3000")
@@ -55,7 +16,7 @@ func main() {
 	}
 	println("server running on port 3000")
 	serverRegistrar := grpc.NewServer()
-	service := &UserServiceServer{}
+	service := &utils.UserServiceServer{}
 
 	user.RegisterUserServiceServer(serverRegistrar, service)
 
