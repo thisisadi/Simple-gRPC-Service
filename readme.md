@@ -39,13 +39,13 @@ To run the application on NON-ARM systems, follow these steps:
 
 Once the application is accessible at http://localhost:3000 on your local machine, you can use a tool like BloomRPC or any other tool for querying the GRPC service.
 
-## Example Request using BloomRPC
+## Sample Request using BloomRPC
 
 1. Launch the app
 
 ![Image Alt Text](./resources/tool.png)
 
-2. Click on the plus button to import the user.proto file.(If you are using the docker image, you'll have to download it manually from the repository.)
+2. Click on the plus button to import the user.proto file.(If you are using the docker image, you'll have to download the user.proto file manually from the git repository.)
 
 ![Image Alt Text](./resources/import.png)
 
