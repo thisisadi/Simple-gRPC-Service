@@ -22,7 +22,7 @@ func (s *UserServiceServer) GetUserById(ctx context.Context, request *user.UserR
 	}
 
 	// If no user is found with the given ID, return an error
-	return nil, status.Errorf(codes.NotFound, "User with ID %d not found", userID)
+	return nil, status.Errorf(codes.NotFound, "User ID not found")
 }
 
 func (s *UserServiceServer) GetUsersByIds(ctx context.Context, request *user.UserIdsRequest) (*user.UsersResponse, error) {
