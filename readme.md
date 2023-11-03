@@ -1,4 +1,4 @@
-# Totality-Corp-Task
+# gRPC Service
 
 This project implements a gRPC service that simulates a user database. Instead of using an actual database, user details are stored in a variable within the service. The service provides two endpoints for fetching user details:
 
